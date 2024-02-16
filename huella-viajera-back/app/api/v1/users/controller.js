@@ -1,8 +1,25 @@
-export const create = (req, res) => {
+import { prisma } from "../../../database.js";
+
+export const create = async (req, res) => {
   const { body } = req;
-  res.json({
-    data: body,
-  });
+
+  console.log("body", body);
+
+  try {
+    const user = await prisma.user.create({
+      data: {
+        ...body,
+      },
+    });
+
+    console.log("user", user);
+
+    res.json({
+      data: user,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const all = (req, res) => {
