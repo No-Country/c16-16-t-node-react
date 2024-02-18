@@ -14,7 +14,7 @@ export const signToken = (payload, expiresIn = expires) => {
 export const auth = async (req, res, next) => {
   let token = req.headers.authorization || "";
 
-  if (token.startWith("Bearer")) {
+  if (token.startsWith("Bearer")) {
     token = token.slice(7);
   }
   if (!token) return next({ message: "Forbidden", status: 403 });
@@ -28,4 +28,18 @@ export const auth = async (req, res, next) => {
   });
 };
 
-export const owner = async (req, res, next) => {};
+export const owner = async (req, res, next) => {
+  const { decoded = {}, data = {} } = req;
+  const { typeUser, idTypeUser } = decoded;
+  if (typeUser === "Admin") {
+    return next();
+  }
+  console.log(data);
+  if (typeUser === "ownerPet" && idTypeUser === data.ownerPetId) {
+    return next();
+  } else if (typeUser === "carer" && idTypeUser === data.carerId) {
+    return next();
+  } else {
+    return next({ message: "Forbidden", status: 403 });
+  }
+};
