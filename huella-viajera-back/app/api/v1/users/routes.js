@@ -10,7 +10,12 @@ export const router = Router();
  *
  */
 
-router.route("/").get(controller.all).post(controller.create);
+router.route("/signup").post(controller.signup);
+router.route("/signin").post(controller.signin);
+
+router.route("/getAll").get(controller.all);
+
+router.param("id", controller.id);
 
 router
   .route("/:id")

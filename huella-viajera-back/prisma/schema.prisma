@@ -11,40 +11,57 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(uuid()) @db.Uuid
-  email    String    @unique
-  name     String?
-  password String
-  carer    Carer?
-  OwnerPet OwnerPet?
+  id        String    @id @default(uuid()) @db.Uuid
+  email     String    @unique
+  password  String
+  role      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  carer     Carer?
+  ownerPet  OwnerPet?
 }
 
 model Carer {
-  id       String @id @default(uuid()) @db.Uuid
+  id       String  @id @default(uuid()) @db.Uuid
   name     String
-  dni      Int    @unique
+  dni      Int     @unique
   phone    String
   address  String
   city     String
   postcode String
   country  String
-  bio      String
-  image    String
-  user     User   @relation(fields: [userId], references: [id])
-  userId   String @unique @db.Uuid
+  bio      String?
+  image    String?
+  user     User    @relation(fields: [userId], references: [id])
+  userId   String  @unique @db.Uuid
 }
 
 model OwnerPet {
-  id       String @id @default(uuid()) @db.Uuid
+  id       String  @id @default(uuid()) @db.Uuid
   name     String
   phone    String
-  dni      Int    @unique
+  dni      Int     @unique
   address  String
   city     String
   postcode String
   country  String
-  bio      String
-  image    String
-  user     User   @relation(fields: [userId], references: [id])
-  userId   String @unique @db.Uuid
+  bio      String?
+  image    String?
+  user     User    @relation(fields: [userId], references: [id])
+  userId   String  @unique @db.Uuid
+  pets     Pet[]
+}
+
+model Pet {
+  id         String   @id @default(uuid()) @db.Uuid
+  name       String
+  type       String
+  breed      String
+  age        Int
+  weight     Int
+  image      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  OwnerPet   OwnerPet @relation(fields: [ownerPetId], references: [id])
+  ownerPetId String   @db.Uuid
 }
