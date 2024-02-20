@@ -8,6 +8,6 @@ import { router as owners } from "./owners/routes.js";
 export const router = Router();
 
 router.use("/users", users);
-router.use("/pets/", pets);
-router.use("carers", carers);
-router.use("owners", owners);
+router.use("/pets", pets);
+router.use("/carers", carers);
+router.use("/owners", owners);

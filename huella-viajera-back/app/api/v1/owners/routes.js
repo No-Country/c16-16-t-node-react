@@ -12,8 +12,8 @@ export const router = Router();
 router.param("id", controller.id);
 
 router
-  .route("/:id")
-  .get(controller.read)
-  .put(auth, owner, controller.update)
-  .patch(auth, owner, controller.update)
-  .delete(auth, owner, controller.remove);
+  .route("/profile/:id")
+  .get(auth, controller.read)
+  .put(auth, controller.update)
+  .patch(auth, controller.update)
+  .delete(auth, controller.remove);
