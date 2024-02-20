@@ -28,6 +28,7 @@ export const auth = async (req, res, next) => {
   });
 };
 
+// Middleware to check if pet belongs to owner
 export const owner = async (req, res, next) => {
   const { decoded = {}, data = {} } = req;
   const { typeUser, idTypeUser } = decoded;
