@@ -96,6 +96,8 @@ export const signin = async (req, res, next) => {
           : user.carer.id,
     });
 
+    console.log("token", token);
+
     res.json({
       data: { ...user, password: undefined },
       meta: {
