@@ -10,6 +10,9 @@ export const id = async (req, res, next) => {
       where: {
         id,
       },
+      include: {
+        ratings: true,
+      },
     });
 
     console.log("result", result);
