@@ -7,6 +7,17 @@ export const signup = async (req, res, next) => {
   const { userData, dataTypeUser } = body;
   console.log(userData);
 
+  if (
+    userData.role !== "ownerPet" ||
+    userData.role !== "carer" ||
+    userData.role !== "Admin"
+  ) {
+    return next({
+      message: "Invalid role",
+      status: 400,
+    });
+  }
+
   try {
     const password = await encryptPassword(body.userData.password);
 
@@ -95,6 +106,8 @@ export const signin = async (req, res, next) => {
           ? user.ownerPet.id
           : user.carer.id,
     });
+
+    console.log("token", token);
 
     res.json({
       data: { ...user, password: undefined },

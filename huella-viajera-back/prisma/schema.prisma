@@ -19,40 +19,41 @@ model User {
   updatedAt DateTime  @updatedAt
   carer     Carer?
   ownerPet  OwnerPet?
-  ratings   Rating[]
 }
 
 model Carer {
-  id           String        @id @default(uuid()) @db.Uuid
-  name         String
-  dni          Int           @unique
-  phone        String
-  address      String
-  city         String
-  postcode     String
-  country      String
-  bio          String?
-  image        String?
-  user         User          @relation(fields: [userId], references: [id])
-  userId       String        @unique @db.Uuid
-  applications Application[]
+  id       String    @id @default(uuid()) @db.Uuid
+  name     String
+  dni      Int       @unique
+  phone    String
+  address  String
+  city     String
+  postcode String
+  country  String
+  bio      String?
+  image    String?
+  user     User      @relation(fields: [userId], references: [id])
+  userId   String    @unique @db.Uuid
+  requests Request[]
+  ratings  Rating[]
 }
 
 model OwnerPet {
-  id             String          @id @default(uuid()) @db.Uuid
-  name           String
-  phone          String
-  dni            Int             @unique
-  address        String
-  city           String
-  postcode       String
-  country        String
-  bio            String?
-  image          String?
-  user           User            @relation(fields: [userId], references: [id])
-  userId         String          @unique @db.Uuid
-  pets           Pet[]
-  advertisements Advertisement[]
+  id       String    @id @default(uuid()) @db.Uuid
+  name     String
+  phone    String
+  dni      Int       @unique
+  address  String
+  city     String
+  postcode String
+  country  String
+  bio      String?
+  image    String?
+  user     User      @relation(fields: [userId], references: [id])
+  userId   String    @unique @db.Uuid
+  pets     Pet[]
+  postings Posting[]
+  ratings  Rating[]
 }
 
 model Pet {
@@ -70,37 +71,38 @@ model Pet {
 }
 
 model Rating {
+  id         String    @id @default(uuid()) @db.Uuid
+  value      Int
+  comment    String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Carer      Carer?    @relation(fields: [carerId], references: [id])
+  carerId    String?   @db.Uuid
+  OwnerPet   OwnerPet? @relation(fields: [ownerPetId], references: [id])
+  ownerPetId String?   @db.Uuid
+}
+
+model Posting {
+  id          String    @id @default(uuid()) @db.Uuid
+  title       String
+  description String
+  initialDate DateTime
+  finalDate   DateTime
+  status      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  OwnerPet    OwnerPet? @relation(fields: [ownerPetId], references: [id])
+  ownerPetId  String?   @db.Uuid
+  requests    Request[]
+}
+
+model Request {
   id        String   @id @default(uuid()) @db.Uuid
-  value     Int
-  comment   String
+  message   String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?  @db.Uuid
-}
-
-model Advertisement {
-  id           String        @id @default(uuid()) @db.Uuid
-  title        String
-  description  String
-  initialDate  DateTime
-  finalDate    DateTime
-  status       Boolean
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  OwnerPet     OwnerPet?     @relation(fields: [ownerPetId], references: [id])
-  ownerPetId   String?       @db.Uuid
-  applications Application[]
-}
-
-model Application {
-  id              String        @id @default(uuid()) @db.Uuid
-  message         String
-  createdAt       DateTime      @default(now())
-  Advertisement   Advertisement @relation(fields: [advertisementId], references: [id])
-  advertisementId String        @db.Uuid
-  status          Boolean
-
-  Carer   Carer?  @relation(fields: [carerId], references: [id])
-  carerId String? @db.Uuid
+  status    String   @default("pending")
+  Carer     Carer?   @relation(fields: [carerId], references: [id])
+  carerId   String?  @db.Uuid
+  Posting   Posting? @relation(fields: [postingId], references: [id])
+  postingId String?  @db.Uuid
 }
