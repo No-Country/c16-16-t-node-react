@@ -12,9 +12,9 @@ export const add = async (req, res, next) => {
     }
 
     try {
-        const result = await prisma.posting.create({
+        const result = await prisma.request.create({
             data: {
-                ...body,
+                message: body.message,
                 carerId,
             },
         });
@@ -34,7 +34,7 @@ export const all = async (req, res, next) => {
   
     console.log("carerId", carerId);
     try {
-      const result = await prisma.pet.findMany({
+      const result = await prisma.request.findMany({
         where: {
           carerId,
         },
@@ -54,7 +54,7 @@ export const id = async (req, res, next) => {
     const { id } = params;
 
     try {
-        const result = await prisma.posting.findUnique({
+        const result = await prisma.request.findUnique({
             where: {
                 id,
             },
@@ -62,7 +62,7 @@ export const id = async (req, res, next) => {
 
         if (result === null) {
             return next({
-                message: "Posting not found",
+                message: "request not found",
                 status: 404,
             });
         } else {
@@ -95,12 +95,12 @@ export const update = async (req, res, next) => {
     }
 
     try {
-        const result = await prisma.posting.update({
+        const result = await prisma.request.update({
             where: {
                 id,
             },
             data: {
-                ...body,
+                message: body.message,
             },
         });
 
@@ -128,7 +128,7 @@ export const remove = async (req, res, next) => {
     }
 
     try {
-        const result = await prisma.posting.delete({
+        const result = await prisma.request.delete({
             where: {
                 id,
             },

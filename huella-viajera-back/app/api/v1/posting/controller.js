@@ -34,7 +34,7 @@ export const all = async (req, res, next) => {
   
     console.log("ownerPetId", ownerPetId);
     try {
-      const result = await prisma.pet.findMany({
+      const result = await prisma.posting.findMany({
         where: {
           ownerPetId,
         },
