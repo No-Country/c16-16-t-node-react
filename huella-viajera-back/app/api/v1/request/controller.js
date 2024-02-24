@@ -14,7 +14,7 @@ export const add = async (req, res, next) => {
     try {
         const result = await prisma.request.create({
             data: {
-                ...body,
+                message: body.message,
                 carerId,
             },
         });
