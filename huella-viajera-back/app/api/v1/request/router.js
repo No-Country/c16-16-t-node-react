@@ -5,8 +5,8 @@ import {auth} from "../auth.js";
 // eslint-disable-next-line new-cap
 export const router = Router();
 /**
- * /api/v1/posting POST - Create a new posting
- * /api/v1/posting GET - Get all postings
+ * /api/v1/request/new POST - Create a new posting
+ * /api/v1/request/getAll GET - Get all postings
  * 
  * 
  */
