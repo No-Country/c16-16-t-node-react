@@ -14,7 +14,8 @@ export const add = async (req, res, next) => {
     try {
         const result = await prisma.posting.create({
             data: {
-                ...body,
+                title: body.title,
+                description: body.description,
                 ownerPetId,
             },
         });
@@ -34,7 +35,7 @@ export const all = async (req, res, next) => {
   
     console.log("ownerPetId", ownerPetId);
     try {
-      const result = await prisma.pet.findMany({
+      const result = await prisma.posting.findMany({
         where: {
           ownerPetId,
         },
@@ -100,7 +101,8 @@ export const update = async (req, res, next) => {
                 id,
             },
             data: {
-                ...body,
+                title: body.title,
+                description: body.description,
             },
         });
 
