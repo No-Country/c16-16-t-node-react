@@ -8,8 +8,8 @@ export const signup = async (req, res, next) => {
   console.log(userData);
 
   if (
-    userData.role !== "ownerPet" ||
-    userData.role !== "carer" ||
+    userData.role !== "ownerPet" &&
+    userData.role !== "carer" &&
     userData.role !== "Admin"
   ) {
     return next({
