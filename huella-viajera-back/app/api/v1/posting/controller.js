@@ -16,6 +16,8 @@ export const add = async (req, res, next) => {
             data: {
                 title: body.title,
                 description: body.description,
+                initialDate: body.initialDate,
+                finalDate: body.finalDate,
                 ownerPetId,
             },
         });
