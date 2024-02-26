@@ -5,13 +5,16 @@ import {auth} from "../auth.js";
 // eslint-disable-next-line new-cap
 export const router = Router();
 /**
- * /api/v1/posting POST - Create a new posting
- * /api/v1/posting GET - Get all postings
- * 
- * 
+ * /api/v1/posting/getAll GET - Get all postings
+ * /api/v1/posting/new POST - Create a new posting
+ * /api/v1/posting/:id GET - Get a posting
+ * /api/v1/posting/:id PUT - Update a posting
+ * /api/v1/posting/:id PATCH - Update a posting
+ * /api/v1/posting/:id DELETE - Delete a posting
  */
 
-router.route("/").get(auth, controller.all).post(auth, controller.add);
+router.route("/getAll").get(auth, controller.all);
+router.route("/new").get(auth, controller.add);
 
 router.param("id", controller.id);
 
