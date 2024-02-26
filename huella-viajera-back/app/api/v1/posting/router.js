@@ -14,7 +14,7 @@ export const router = Router();
  */
 
 router.route("/getAll").get(auth, controller.all);
-router.route("/new").get(auth, controller.add);
+router.route("/new").post(auth, controller.add);
 
 router.param("id", controller.id);
 
