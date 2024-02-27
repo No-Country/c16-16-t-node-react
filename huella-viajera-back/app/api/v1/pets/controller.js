@@ -1,7 +1,9 @@
 import { prisma } from "../../../database.js";
+import { uploadFiles } from "../../uploadsFiles/uploads.js";
+import fs from "fs";
 
 export const add = async (req, res, next) => {
-  const { body = {}, decoded = {} } = req;
+  const { body = {}, decoded = {}, files } = req;
   const { typeUser, idTypeUser: ownerPetId } = decoded;
 
   if (typeUser !== "ownerPet") {
@@ -12,10 +14,21 @@ export const add = async (req, res, next) => {
   }
 
   try {
+    const promises = files.map((file) => {
+      return uploadFiles(file.path);
+    });
+    const image = await Promise.all(promises);
+
+    // elimino los archivos temporales
+    files.forEach((file) => fs.unlinkSync(file.path));
+
     const result = await prisma.pet.create({
       data: {
         ...body,
+        age: parseInt(body.age),
+        weight: parseInt(body.weight),
         ownerPetId,
+        image: image[0].url,
       },
     });
 
@@ -23,6 +36,7 @@ export const add = async (req, res, next) => {
       data: result,
     });
   } catch (error) {
+    files.forEach((file) => fs.unlinkSync(file.path));
     next(error);
   }
 };
@@ -74,7 +88,7 @@ export const read = async (req, res, next) => {
   });
 };
 export const update = async (req, res, next) => {
-  const { body = {}, decoded = {} } = req;
+  const { body = {}, decoded = {}, files } = req;
   const { id } = req.params;
   const { typeUser } = decoded;
 
@@ -86,12 +100,26 @@ export const update = async (req, res, next) => {
   }
 
   try {
+    const newData = {
+      ...body,
+      age: parseInt(body.age),
+      weight: parseInt(body.weight),
+    };
+    if (files.length > 0) {
+      const promises = files.map((file) => {
+        return uploadFiles(file.path);
+      });
+      const image = await Promise.all(promises);
+      newData.image = image[0].url;
+    }
+
     const result = await prisma.pet.update({
       where: {
         id,
       },
       data: {
-        ...body,
+        ...newData,
+        updatedAt: new Date(),
       },
     });
 
