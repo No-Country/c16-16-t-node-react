@@ -102,8 +102,10 @@ export const update = async (req, res, next) => {
   try {
     const newData = {
       ...body,
-      age: parseInt(body.age),
-      weight: parseInt(body.weight),
+      // age: parseInt(body.age),
+      // weight: parseInt(body.weight),
+      ...(body.age && { age: parseInt(body.age) }),
+      ...(body.weight && { weight: parseInt(body.weight) }),
     };
     if (files.length > 0) {
       const promises = files.map((file) => {

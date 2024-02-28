@@ -1,4 +1,6 @@
 import { prisma } from "../../../database.js";
+import { uploadFiles } from "../../uploadsFiles/uploads.js";
+import fs from "fs";
 
 export const id = async (req, res, next) => {
   const { params = {} } = req;
@@ -12,6 +14,8 @@ export const id = async (req, res, next) => {
       },
       include: {
         ratings: true,
+        photos: true,
+        pets: true,
       },
     });
 
@@ -33,7 +37,7 @@ export const read = async (req, res, next) => {
   });
 };
 export const update = async (req, res, next) => {
-  const { body = {}, decoded = {} } = req;
+  const { body = {}, decoded = {}, files } = req;
   const { typeUser } = decoded;
   const { id } = req.params;
 
@@ -45,11 +49,36 @@ export const update = async (req, res, next) => {
   }
 
   try {
+    let newData = {
+      ...body,
+    };
+
+    if (files.length > 0) {
+      const promises = files.map((file) => uploadFiles(file.path));
+      const images = await Promise.all(promises);
+
+      const fotosCloudinary = [];
+      images.forEach((element) => {
+        fotosCloudinary.push({ image: element.url });
+      });
+
+      files.forEach((file) => {
+        fs.unlinkSync(file.path);
+      });
+      newData = {
+        ...newData,
+        photos: {
+          deleteMany: {},
+          create: fotosCloudinary,
+        },
+      };
+    }
+
     const result = await prisma.ownerPet.update({
       where: {
         id,
       },
-      data: body,
+      data: { ...newData },
     });
 
     res.json({
@@ -60,3 +89,11 @@ export const update = async (req, res, next) => {
   }
 };
 export const remove = async (req, res, next) => {};
+
+export const updateProfilePhoto = async (req, res, next) => {
+  res.json({
+    data: {
+      url: "update url",
+    },
+  });
+};
