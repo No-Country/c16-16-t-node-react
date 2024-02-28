@@ -169,3 +169,45 @@ export const remove = (req, res) => {
   res.status(204);
   res.end();
 };
+
+export const changePassword = async (req, res, next) => {
+  const { body = {}, decoded = {} } = req;
+  const { id } = decoded;
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        password: true,
+      },
+    });
+
+    const passwordMatch = await verifyPassword(body.oldPassword, user.password);
+
+    if (!passwordMatch) {
+      return next({
+        message: "Invalid old password",
+        status: 400,
+      });
+    }
+
+    const newPassword = await encryptPassword(body.newPassword);
+
+    const result = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        password: newPassword,
+      },
+    });
+
+    res.json({
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

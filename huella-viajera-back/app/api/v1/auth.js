@@ -44,3 +44,23 @@ export const owner = async (req, res, next) => {
     return next({ message: "Forbidden", status: 403 });
   }
 };
+
+// Middleware to check if profile belong me
+
+export const me = async (req, res, next) => {
+  const { decoded = {}, params = {} } = req;
+  const { typeUser, idTypeUser } = decoded;
+  const { id } = params;
+  console.log("id", id);
+  console.log("idTypeUser", idTypeUser);
+  if (typeUser === "Admin") {
+    return next();
+  }
+  if (typeUser === "ownerPet" && idTypeUser === id) {
+    return next();
+  } else if (typeUser === "carer" && idTypeUser === id) {
+    return next();
+  } else {
+    return next({ message: "No esta autorizado", status: 403 });
+  }
+};
