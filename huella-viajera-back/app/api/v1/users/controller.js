@@ -1,5 +1,6 @@
 import { prisma } from "../../../database.js";
 import { signToken } from "../auth.js";
+import { mensajeBienvenida, transporter } from "../mailer.js";
 import { encryptPassword, verifyPassword } from "./model.js";
 
 export const signup = async (req, res, next) => {
@@ -46,6 +47,12 @@ export const signup = async (req, res, next) => {
           },
         });
       }
+
+      // aqui realizo el envio del email de bienvenida
+      const { email } = user;
+      const mensaje = mensajeBienvenida({ email });
+      await transporter.sendMail(mensaje);
+
       res.status(201);
       res.json({
         data: "User created successfully",
