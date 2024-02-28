@@ -1,5 +1,6 @@
 import { prisma } from "../../../database.js";
 import { signToken } from "../auth.js";
+import { mensajeBienvenida, transporter } from "../mailer.js";
 import { encryptPassword, verifyPassword } from "./model.js";
 
 export const signup = async (req, res, next) => {
@@ -46,6 +47,12 @@ export const signup = async (req, res, next) => {
           },
         });
       }
+
+      // aqui realizo el envio del email de bienvenida
+      const { email } = user;
+      const mensaje = mensajeBienvenida({ email });
+      await transporter.sendMail(mensaje);
+
       res.status(201);
       res.json({
         data: "User created successfully",
@@ -161,4 +168,46 @@ export const update = (req, res) => {
 export const remove = (req, res) => {
   res.status(204);
   res.end();
+};
+
+export const changePassword = async (req, res, next) => {
+  const { body = {}, decoded = {} } = req;
+  const { id } = decoded;
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        password: true,
+      },
+    });
+
+    const passwordMatch = await verifyPassword(body.oldPassword, user.password);
+
+    if (!passwordMatch) {
+      return next({
+        message: "Invalid old password",
+        status: 400,
+      });
+    }
+
+    const newPassword = await encryptPassword(body.newPassword);
+
+    const result = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        password: newPassword,
+      },
+    });
+
+    res.json({
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
