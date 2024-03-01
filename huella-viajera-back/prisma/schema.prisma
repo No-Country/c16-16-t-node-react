@@ -62,6 +62,9 @@ model PhotoHome {
   image      String
   OwnerPet   OwnerPet? @relation(fields: [ownerPetId], references: [id])
   ownerPetId String?   @db.Uuid
+
+  posting    Posting?  @relation(fields: [postingId], references: [id])
+  postingId  String?   @db.Uuid
 }
 
 model Pet {
@@ -102,6 +105,8 @@ model Posting {
   OwnerPet    OwnerPet? @relation(fields: [ownerPetId], references: [id])
   ownerPetId  String?   @db.Uuid
   requests    Request[]
+  
+  photos      PhotoHome[]
 }
 
 model Request {
