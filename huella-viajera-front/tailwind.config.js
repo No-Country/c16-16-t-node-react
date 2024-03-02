@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: ["./index.html", "./src/**/*.jsx"],
   theme: {
@@ -11,13 +12,14 @@ export default {
       'gray-600':'#757575',
       'gray-700':'#616161',
       'gray-text':'#7A7A7A',
+      'gray-font':'#424242',
       'white':'#FFFFFF',
       'black':'#000000',
       'green':'#7DE900',
       'pink':'#C96694',
       'orange':'#F7A363',
       'cyan':'#48C8BB',
-    }
+    },
   },
   plugins: [],
 }
