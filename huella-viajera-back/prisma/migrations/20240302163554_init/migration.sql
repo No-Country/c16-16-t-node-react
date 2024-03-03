@@ -45,6 +45,16 @@ CREATE TABLE "OwnerPet" (
 );
 
 -- CreateTable
+CREATE TABLE "PhotoHome" (
+    "id" UUID NOT NULL,
+    "image" TEXT NOT NULL,
+    "ownerPetId" UUID,
+    "postingId" UUID,
+
+    CONSTRAINT "PhotoHome_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Pet" (
     "id" UUID NOT NULL,
     "name" TEXT NOT NULL,
@@ -120,6 +130,12 @@ ALTER TABLE "Carer" ADD CONSTRAINT "Carer_userId_fkey" FOREIGN KEY ("userId") RE
 
 -- AddForeignKey
 ALTER TABLE "OwnerPet" ADD CONSTRAINT "OwnerPet_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PhotoHome" ADD CONSTRAINT "PhotoHome_ownerPetId_fkey" FOREIGN KEY ("ownerPetId") REFERENCES "OwnerPet"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PhotoHome" ADD CONSTRAINT "PhotoHome_postingId_fkey" FOREIGN KEY ("postingId") REFERENCES "Posting"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Pet" ADD CONSTRAINT "Pet_ownerPetId_fkey" FOREIGN KEY ("ownerPetId") REFERENCES "OwnerPet"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

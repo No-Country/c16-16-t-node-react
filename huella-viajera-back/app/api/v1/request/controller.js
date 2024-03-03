@@ -12,6 +12,22 @@ export const add = async (req, res, next) => {
     }
 
     try {
+        const { postingId } = body;
+
+        // Verificar si el posting al que se quiere postular existe
+        const posting = await prisma.posting.findUnique({
+            where: {
+                id: postingId,
+            },
+        });
+
+        if (!posting) {
+            return next({
+                message: "El posting al que intenta postularse no existe",
+                status: 404,
+            });
+        }
+
         const result = await prisma.request.create({
             data: {
                 message: body.message,
@@ -88,7 +104,7 @@ export const update = async (req, res, next) => {
     const { typeUser } = decoded;
     const { id } = req.params;
 
-    if (typeUser !== "carer") {
+    if (typeUser !== "carer" && typeUser !== "ownerPet") {
         return next({
             message: "No autorizado para realizar esta acción",
             status: 403,
@@ -102,6 +118,7 @@ export const update = async (req, res, next) => {
             },
             data: {
                 message: body.message,
+                status: body.status,
             },
         });
 
