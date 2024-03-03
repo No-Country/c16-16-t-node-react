@@ -57,21 +57,25 @@ export const id = async (req, res, next) => {
     const { id } = params;
 
     try {
-        const result = await prisma.posting.findUnique({
+        const posting = await prisma.posting.findUnique({
             where: {
                 id,
             },
+            include: {
+                requests: true,
+            },
         });
 
-        if (result === null) {
+        if (posting === null) {
             return next({
                 message: "Posting not found",
                 status: 404,
             });
-        } else {
-            req.data = result;
-            next();
-        }
+        } 
+        res.json({
+            data: posting,
+        });
+        
     } catch (error) {
         next(error);
     }

@@ -9,6 +9,7 @@ export const router = Router();
  * /api/v1/posting/new POST - Create a new posting
  * /api/v1/posting/:id GET - Get a posting
  * /api/v1/posting/:id PUT - Update a posting
+ * /api/v1/posting/:id/status PUT - Update a request
  * /api/v1/posting/:id PATCH - Update a posting
  * /api/v1/posting/:id DELETE - Delete a posting
  */
