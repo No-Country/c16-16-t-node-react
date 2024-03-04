@@ -1,6 +1,6 @@
-import {Router} from "express";
+import { Router } from "express";
 import * as controller from "./controller.js";
-import {auth} from "../auth.js";
+import { auth } from "../auth.js";
 
 // eslint-disable-next-line new-cap
 export const router = Router();
@@ -15,6 +15,7 @@ export const router = Router();
  */
 
 router.route("/getAll").get(auth, controller.all);
+router.route("/list").get(controller.list);
 router.route("/new").post(auth, controller.add);
 
 router.param("id", controller.id);
