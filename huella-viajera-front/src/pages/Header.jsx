@@ -3,7 +3,6 @@ import { useContext, useState } from 'react';
 import { UserContext } from '../context/UserContext';
 
 import logo from '../assets/logo.jpg'
-import exampleProfilePhoto from '@assets/profile.jpg'
 
 
 export const Header = () => {
@@ -48,7 +47,7 @@ export const Header = () => {
        <div className="relative">
           <div className=" p-2 rounded-lg  flex items-center gap-4">
             <h1 className="text-white hover:cursor-default">{userData.role === "ownerPet" ? userData.ownerPet.name : userData.carer.name }</h1>
-            <div className="w-16 h-16 rounded-full bg-cover bg-center shadow-lg hover:cursor-pointer hover:border-2 hover: border-white" style={{ backgroundImage: `url(${exampleProfilePhoto})`}} onClick={() => setIsOpen((prev) => (!prev))}></div>
+            <div className="w-16 h-16 rounded-full bg-cover bg-center shadow-lg hover:cursor-pointer hover:border-2 hover: border-white" style={{ backgroundImage: `url(${userData.ownerPet.image})`}} onClick={() => setIsOpen((prev) => (!prev))}></div>
           </div>
          
 
