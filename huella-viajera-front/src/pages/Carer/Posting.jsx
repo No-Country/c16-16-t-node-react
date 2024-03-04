@@ -23,12 +23,13 @@ export const Posting = () => {
   return (
     <ContenedorCarer style={{ backgroundImage: `url(${BG})` }}>
       <div
-        className="d-flex flex-column flex-wrap gap-2  "
+        className="d-flex flex-column flex-wrap gap-3  "
         style={{
           backgroundColor: "white",
           padding: "2rem",
           margin: "2rem",
           borderRadius: "10px",
+          boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.5)",
         }}
       >
         <strong>Anuncios</strong>

@@ -4,8 +4,13 @@ import BG from "@assets/BG.png";
 import { useLocation } from "react-router-dom";
 import { es } from "date-fns/locale";
 import { format } from "date-fns";
+import { useState } from "react";
+import { ModalMessages } from "./ModaMessages";
+import { ModalImage } from "./ModalImage";
 
 export const PostingDetail = () => {
+  const [modalMessages, setModalMessages] = useState(false);
+  const [modalImages, setModalImages] = useState(false);
   const location = useLocation();
   const post = location.state?.post;
   return (
@@ -62,6 +67,7 @@ export const PostingDetail = () => {
                     <Image
                       key={image.id}
                       src={image.image}
+                      onClick={() => setModalImages(true)}
                       rounded
                       style={{
                         width: "100px",
@@ -72,6 +78,11 @@ export const PostingDetail = () => {
                   );
                 })}
               </div>
+              <ModalImage
+                show={modalImages}
+                onHide={() => setModalImages(false)}
+                images={post.OwnerPet.photos}
+              />
             </div>
 
             <p>{post.description}</p>
@@ -102,7 +113,14 @@ export const PostingDetail = () => {
               </p>
             </div>
             <div className="d-flex justify-end">
-              <ButtonStyled>Aplicar</ButtonStyled>
+              <ButtonStyled onClick={() => setModalMessages(true)}>
+                Aplicar
+              </ButtonStyled>
+              <ModalMessages
+                show={modalMessages}
+                onHide={() => setModalMessages(false)}
+                postingId={post.id}
+              />
             </div>
           </Card.Body>
         </Card>

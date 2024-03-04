@@ -17,11 +17,14 @@ export const NavCarer = () => {
         <div className="d-flex align-items-center pt-12 justify-content-around">
           <Image
             width={70}
-            src="https://res.cloudinary.com/dppqkypts/image/upload/v1702849125/imagesBlog/fcc30d17932e64190ad4289f41fd370f.jpg"
+            src={
+              userData?.carer?.image ||
+              "https://res.cloudinary.com/dppqkypts/image/upload/v1701901417/Dise%C3%B1o_sin_t%C3%ADtulo_11_r8jfvs.png"
+            }
             roundedCircle
           />
           <div className="d-flex flex-column">
-            <strong>{userData.carer.name}</strong>
+            <strong>{userData?.carer?.name}</strong>
             <p
               style={{
                 fontSize: "0.8rem",

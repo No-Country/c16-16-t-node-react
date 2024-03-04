@@ -1,16 +1,34 @@
-import { Card, Image } from "react-bootstrap";
+import { Badge, Card, Image } from "react-bootstrap";
 import { ButtonStyled } from "./StyledComponents";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 export const PostingCard = ({ post, viewPosting }) => {
+  const { userData } = useContext(UserContext);
+  console.log(userData);
   const viewDetail = () => {
     viewPosting(post);
+  };
+
+  const verifyMyRequest = () => {
+    const id = userData?.carer?.id;
+    console;
+    const result = post.requests.some((request) => {
+      return request.carerId === id;
+    });
+
+    return result;
   };
   return (
     <div>
       <Card
-        style={{ width: "45rem", height: "10rem" }}
+        style={{
+          width: "45rem",
+          height: "11rem",
+          boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
+        }}
         className="d-flex flex-column  "
       >
         <div>
@@ -52,6 +70,19 @@ export const PostingCard = ({ post, viewPosting }) => {
                 }}
               >
                 {post.description}
+              </Card.Text>
+              <Card.Text
+                style={{
+                  width: "500px",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                <Badge bg="secondary">{post.requests.length} solicitudes</Badge>
+                <Badge bg="info" className="mx-3">
+                  {verifyMyRequest() ? "Ya aplicaste" : null}
+                </Badge>
               </Card.Text>
             </div>
           </Card.Body>
