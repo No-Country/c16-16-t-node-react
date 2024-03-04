@@ -54,6 +54,7 @@ export const list = async (req, res, next) => {
   try {
     const result = await prisma.posting.findMany({
       include: {
+        requests: true,
         OwnerPet: {
           select: {
             photos: true,
