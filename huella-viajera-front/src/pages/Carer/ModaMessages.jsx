@@ -8,7 +8,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export function ModalMessages(props) {
-  const url = "http://localhost:3000/";
+  const url = "https://huellaviajera.onrender.com/";
   const token = sessionStorage.token;
   const [mensajeContenido, setMensajeContenido] = useState("");
   const [error, setError] = useState(null);
