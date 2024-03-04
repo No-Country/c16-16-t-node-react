@@ -11,6 +11,7 @@ export const Pets = () => {
   const [pets, setPets] = useState([])
 
   const [modal, setModal] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
   const url = "https://huellaviajera.onrender.com/api/v1/pets"
   const token = sessionStorage.token
@@ -22,14 +23,14 @@ export const Pets = () => {
     async function getAllPets() {
         
       try {
-
+        setIsLoading(true)
         const responsePost = await axios.get(url, 
         {headers: {
           'Authorization': `Bearer ${token}`
           }
         });
         setPets(responsePost.data.data)
-       
+        setIsLoading(false)
       } catch (error) {
         console.error(error);
       } 
@@ -120,16 +121,16 @@ const petId = e.target.id
 
 //EDITAR MASCOTAS
 
-const [isEditMode, setIsEditMode] = useState(false)
+const [isEditMode, setIsEditMode] = useState("")
 
 const initEditMode = (e) => {
   onResetForm()
-  setIsEditMode(true)
+  setIsEditMode(e.target.id)
 }
 
 const finishEditMode = (e) => {
   
-  setIsEditMode(false)
+  setIsEditMode("")
 
   const form = formState
   console.log(form)
@@ -168,10 +169,12 @@ const finishEditMode = (e) => {
       <ul className="mx-6">
         <div className="flex justify-end"><button className=" font-bold mx-4 mb-2 text-end hover:cursor-pointer" name="add" onClick={openModal}>+ Agregar Mascota</button></div>
       </ul>
-      <div className='flex-col p-4 space-y-8'>
-         {pets.map((pet, idx) => {
+      {isLoading 
+      ? <div className=" flex justify-center my-8">Cargando...</div>
+      : <div className='flex-col p-4 space-y-8'>
+         {pets.map((pet) => {
           return(
-            <div className="h-64 flex items-center border rounded-2xl py-2 px-8 justify-between shadow-lg" key={idx}>
+            <div className="h-64 flex items-center border rounded-2xl py-2 px-8 justify-between shadow-lg" key={pet.id}>
               <div className= "w-40 h-40 bg-cover bg-center shadow-lg ml-16" style={{ backgroundImage: `url(${pet.image})`}}></div>
               
               
@@ -180,15 +183,15 @@ const finishEditMode = (e) => {
                   <ul>
                 <li>
                   <label className="font-semibold text-xl" htmlFor="name">Nombre:</label><br />
-                  {!isEditMode ? <span>{pet.name}</span> : <input className="w-36 h-8 rounded-lg px-2 py-1 my-1 bg-gray-300" type="text" id="name" name="name" value={name} placeholder={pet.name} onChange={onInputChange}/>}
+                  {isEditMode==pet.id ? <input className="w-36 h-8 rounded-lg px-2 py-1 my-1 bg-gray-300" type="text" id="name" name="name" value={name} placeholder={pet.name} onChange={onInputChange}/> : <span>{pet.name}</span>} 
                 </li>
                 <li>
                   <label className="font-semibold text-xl" htmlFor="type">Tipo:</label><br />
-                  {!isEditMode ? <span>{pet.type}</span> : <input className="w-36 h-8 rounded-lg px-2 py-1 my-1 bg-gray-300" type="text" id="type" name="type" value={type} placeholder={pet.type} onChange={onInputChange}/>}
+                  {isEditMode==pet.id ? <input className="w-36 h-8 rounded-lg px-2 py-1 my-1 bg-gray-300" type="text" id="type" name="type" value={type} placeholder={pet.type} onChange={onInputChange}/> : <span>{pet.type}</span>}
                 </li>
                 <li>
                   <label className="font-semibold text-xl" htmlFor="breed">Raza:</label><br />
-                  {!isEditMode ? <span>{pet.breed}</span>: <input className="w-36 h-8 rounded-lg px-2 py-1 my-1 bg-gray-300" type="text" id="breed" name="breed" value={breed} placeholder={pet.breed} onChange={onInputChange}/>}
+                  {isEditMode==pet.id ? <input className="w-36 h-8 rounded-lg px-2 py-1 my-1 bg-gray-300" type="text" id="breed" name="breed" value={breed} placeholder={pet.breed} onChange={onInputChange}/> : <span>{pet.breed}</span>}
                 </li>
                 </ul>
                 </div>
@@ -197,11 +200,11 @@ const finishEditMode = (e) => {
                 <ul>
                 <li>
                   <label className="font-semibold text-xl" htmlFor="age">Edad:</label><br />
-                  {!isEditMode ? <span>{pet.age}</span> : <input className="w-14 h-8 rounded-lg px-2 py-1 my-1 bg-gray-300" type="text" inputMode='numeric' id="age" name="age" value={age} placeholder={pet.age} onChange={onInputChange}/>}<span>{pet.age == 1 ? " Año" : " Años"}</span>
+                  {isEditMode==pet.id ? <input className="w-14 h-8 rounded-lg px-2 py-1 my-1 bg-gray-300" type="text" inputMode='numeric' id="age" name="age" value={age} placeholder={pet.age} onChange={onInputChange}/> : <span>{pet.age}</span>}<span>{pet.age == 1 ? " Año" : " Años"}</span>
                 </li>
                 <li>
                   <label className="font-semibold text-xl" htmlFor="weight">Peso:</label><br />
-                  {!isEditMode ? <span>{pet.weight}</span> : <input className="w-14 h-8 rounded-lg px-2 py-1 my-1 bg-gray-300" type="text" inputMode='numeric' id="weight" name="weight" value={weight} placeholder={pet.weight} onChange={onInputChange}/>}<span>{pet.weight == 1 ? " Kilo" : " Kilos"}</span>
+                  {isEditMode==pet.id ? <input className="w-14 h-8 rounded-lg px-2 py-1 my-1 bg-gray-300" type="text" inputMode='numeric' id="weight" name="weight" value={weight} placeholder={pet.weight} onChange={onInputChange}/> : <span>{pet.weight}</span>}<span>{pet.weight == 1 ? " Kilo" : " Kilos"}</span>
                 </li>
                 </ul>
                 </div>
@@ -221,7 +224,7 @@ const finishEditMode = (e) => {
               
             </div>
             )})}
-      </div>              
+      </div>}              
     </div>
 
 {/* Formulario modal para agregar nueva mascota con hook useForm: */}

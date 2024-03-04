@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { Navigate } from "react-router-dom"
-import exampleProfilePhoto from '@assets/profile.jpg'
 
 //DB INTERNA PROVISORIA HASTA LEVANTAR IMAGENES QUE GESTIONARA WELLINTON
 import {ownerPetImages} from "./db"
@@ -31,7 +30,7 @@ export const OwnerPetPannel = () => {
     <div className=" flex-col w-[450px] py-20 space-y-4 shadow-lg">
             
             <div className='flex justify-center items-center gap-4 px-8'>
-              <div className="w-16 h-16 rounded-full bg-cover bg-center" style={{ backgroundImage: `url(${exampleProfilePhoto})`}}></div>
+              <div className="w-16 h-16 rounded-full bg-cover bg-center" style={{ backgroundImage: `url(${userData.ownerPet.image})`}}></div>
               <div>
                 <h1 className="font-bold text-center">{userData.ownerPet.name}</h1>
                 <p>{userData.email}</p>
