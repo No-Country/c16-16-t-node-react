@@ -84,25 +84,6 @@ export const update = async (req, res, next) => {
   const { typeUser } = decoded;
   const { id } = req.params;
 
-<<<<<<< HEAD
-    if (typeUser !== "carer" && typeUser !== "ownerPet") {
-        return next({
-            message: "No autorizado para realizar esta acción",
-            status: 403,
-        });
-    }
-
-    try {
-        const result = await prisma.request.update({
-            where: {
-                id,
-            },
-            data: {
-                message: body.message,
-                status: body.status,
-            },
-        });
-=======
   if (typeUser !== "carer") {
     return next({
       message: "No autorizado para realizar esta acción",
@@ -119,7 +100,6 @@ export const update = async (req, res, next) => {
         message: body.message,
       },
     });
->>>>>>> 0649c17 (add components for request)
 
     console.log("result", result);
 
