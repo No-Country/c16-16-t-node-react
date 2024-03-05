@@ -41,16 +41,15 @@ export const NavLinkStyled = styled(NavLink)(({ theme }) => ({
 }));
 
 export const ContenedorCarer = styled("div")(({ theme }) => ({
-  height: "800px",
   backgroundColor: "white",
   paddingTop: "10px",
   margin: "0",
   overflow: "hidden",
   width: "880px",
+  height: "100%",
 }));
 
 export const ContenedorNav = styled("div")(({ theme }) => ({
-  height: "800px",
   backgroundColor: "white",
   padding: "0",
   margin: "0",

@@ -38,6 +38,17 @@ export const all = async (req, res, next) => {
       where: {
         carerId,
       },
+      include: {
+        Posting: {
+          include: {
+            OwnerPet: true,
+          },
+        },
+      },
+
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     res.json({
@@ -84,7 +95,7 @@ export const update = async (req, res, next) => {
   const { typeUser } = decoded;
   const { id } = req.params;
 
-  if (typeUser !== "carer") {
+  if (typeUser !== "carer" && typeUser !== "ownerPet") {
     return next({
       message: "No autorizado para realizar esta acción",
       status: 403,

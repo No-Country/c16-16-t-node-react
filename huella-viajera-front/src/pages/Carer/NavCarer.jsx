@@ -46,8 +46,11 @@ export const NavCarer = () => {
           <i className="bi bi-person-badge-fill"></i>
           Mis aplicaciones
         </NavLinkStyled>
-        <NavLinkStyled to="facturas">
+        <NavLinkStyled to="/carer/ratings">
           <i className="bi bi-receipt-cutoff"></i>Mis reseñas
+        </NavLinkStyled>
+        <NavLinkStyled to="/carer/ratings">
+          <i className="bi bi-box-arrow-left"></i>Cerrar sesion
         </NavLinkStyled>
       </NavStyled>
     </ContenedorNav>
