@@ -40,6 +40,20 @@ export const all = async (req, res, next) => {
       where: {
         ownerPetId,
       },
+      include: {
+        requests: {
+          include: {
+            Carer: {
+              select: {
+                id: true,
+                name: true,
+                image: true,
+                ratings: true,
+              },
+            },
+          },
+        },
+      },
     });
 
     res.json({
