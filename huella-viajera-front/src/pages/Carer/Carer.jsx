@@ -11,11 +11,7 @@ export const Carer = () => {
       {token ? (
         <div className="d-flex  ">
           <NavCarer />
-          <div
-            style={{
-              height: "100vh",
-            }}
-          >
+          <div style={{}}>
             <CarerRouter />
           </div>
         </div>
