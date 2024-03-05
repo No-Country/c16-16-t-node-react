@@ -151,6 +151,30 @@ const onDelete = (e) => {
           const joinArray = reverseArray.join("-")
           return (joinArray)
         }
+
+
+        async function getRequest() {
+    
+          const urlRequest = "https://huellaviajera.onrender.com/api/v1/request"
+          const token = sessionStorage.token
+      
+          try {
+            console.log(`${urlRequest}/:${post.id}`)
+            const responseGet = await axios.get(`${urlRequest}/:${post.id}`, 
+              {headers: {
+                'Authorization': `Bearer ${token}`
+                }
+              });
+              
+              const request = responseGet.data.data
+              console.log(request)
+          } catch (error) {
+            console.error(error);
+          }
+        }
+        getRequest()
+
+
           return(
         <div className="flex justify-between h-fit border rounded-2xl p-6 my-4 shadow-lg" key={post.id}>
           
