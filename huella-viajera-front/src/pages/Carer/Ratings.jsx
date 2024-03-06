@@ -27,6 +27,7 @@ export const Ratings = () => {
   };
 
   const calculateAverage = () => {
+    if (data?.ratings?.length === 0) return 0;
     const total = data?.ratings?.reduce((acc, rating) => acc + rating.value, 0);
     return total / data?.ratings?.length;
   };
