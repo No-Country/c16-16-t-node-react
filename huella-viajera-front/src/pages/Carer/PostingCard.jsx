@@ -7,7 +7,7 @@ import { UserContext } from "../../context/UserContext";
 
 export const PostingCard = ({ post, viewPosting }) => {
   const { userData } = useContext(UserContext);
-  console.log(userData);
+
   const viewDetail = () => {
     viewPosting(post);
   };
@@ -21,12 +21,49 @@ export const PostingCard = ({ post, viewPosting }) => {
 
     return result;
   };
+  const StarRating = ({ value }) => {
+    const stars = [];
+    for (let i = 0; i < value; i++) {
+      stars.push(
+        <i
+          key={i}
+          className="bi bi-star-fill"
+          style={{
+            color: "#EEB800",
+          }}
+        ></i>
+      );
+    }
+    if (stars.length === 0)
+      stars.push(
+        <p className="text-sm">
+          <i
+            style={{
+              color: "red",
+            }}
+            className="bi bi-exclamation-circle-fill"
+          ></i>{" "}
+          No tiene calificaciones
+        </p>
+      );
+
+    return <div>{stars}</div>;
+  };
+
+  const calculateAverage = () => {
+    if (post.OwnerPet.ratings.length === 0) return 0;
+    const total = post.OwnerPet.ratings.reduce(
+      (acc, rating) => acc + rating.value,
+      0
+    );
+    return total / post.OwnerPet.ratings.length;
+  };
   return (
     <div>
       <Card
         style={{
           width: "45rem",
-          height: "11rem",
+          height: "13rem",
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
         }}
         className="d-flex flex-column  "
@@ -47,20 +84,11 @@ export const PostingCard = ({ post, viewPosting }) => {
                 Hace{" "}
                 {formatDistanceToNow(new Date(post.createdAt), { locale: es })}
               </strong>
-              <div>
-                <i
-                  className="bi bi-star-fill"
-                  style={{
-                    color: "#EEB800",
-                  }}
-                ></i>
-                <i
-                  className="bi bi-star-fill"
-                  style={{
-                    color: "#EEB800",
-                  }}
-                ></i>
+              <p>{post.OwnerPet.name}</p>
+              <div className="pt-1 pb-2">
+                <StarRating value={calculateAverage()} />
               </div>
+
               <Card.Text
                 style={{
                   width: "500px",

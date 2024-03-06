@@ -4,6 +4,7 @@ import BG from "@assets/BG.png";
 import { UserContext } from "../../context/UserContext";
 import { useContext } from "react";
 import { useMyProfile } from "../../domain/useMyProfile";
+import { format } from "date-fns";
 
 export const Ratings = () => {
   const { userData } = useContext(UserContext);
@@ -42,7 +43,7 @@ export const Ratings = () => {
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.5)",
         }}
       >
-        <strong>Mis Reseñas</strong>
+        <strong>Mis reseñas como cuidador</strong>
         <div className="d-flex align-items-center gap-4">
           <Image
             width={100}
@@ -53,14 +54,14 @@ export const Ratings = () => {
             roundedCircle
           />
           <div>
-            <strong>Puntuacion promedio</strong>
+            <strong>{data?.name}</strong>
             <StarRating value={calculateAverage()} />
             <p>{}</p>
           </div>
         </div>
         <hr />
         <div className="pt-3 mb-3">
-          <strong>{data?.ratings?.length} Comentarios</strong>
+          <strong>({data?.ratings?.length} ) Comentarios</strong>
         </div>
         {loading && <Spinner animation="border" variant="info" />}
         {error && <p>{error}</p>}
@@ -74,7 +75,20 @@ export const Ratings = () => {
                 }}
               >
                 <Card.Body>
-                  <Card.Title>Autor</Card.Title>
+                  <Card.Title>
+                    <Image
+                      width={30}
+                      src={
+                        userData?.carer?.image ||
+                        "https://res.cloudinary.com/dppqkypts/image/upload/v1701901417/Dise%C3%B1o_sin_t%C3%ADtulo_11_r8jfvs.png"
+                      }
+                      roundedCircle
+                    />
+                    <p>{rating.OwnerPet?.name}</p>
+                  </Card.Title>
+                  <Card.Text>
+                    {format(rating.createdAt, "dd/MM/yyyy")}
+                  </Card.Text>
                   <Card.Text>
                     <StarRating value={rating.value} />
                   </Card.Text>
