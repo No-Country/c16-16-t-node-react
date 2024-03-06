@@ -14,7 +14,7 @@ router.param("id", controller.id);
 
 router
   .route("/profile/:id")
-  .get(auth, controller.read)
+  .get(controller.read)
   .put(auth, me, controller.update)
   .patch(auth, me, controller.update)
   .delete(auth, controller.remove);

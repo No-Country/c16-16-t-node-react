@@ -14,6 +14,9 @@ export const id = async (req, res, next) => {
       },
       include: {
         ratings: {
+          where: {
+            destination: "carer",
+          },
           include: {
             OwnerPet: true,
           },
