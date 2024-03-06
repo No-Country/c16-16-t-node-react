@@ -195,13 +195,14 @@ const onAccept = (e) => {
           }
         });
       console.log(responsePut)
-      // const responseGet = await axios.get(`${urlPosts}/getAll`, 
-      //   {headers: {
-      //     'Authorization': `Bearer ${token}`
-      //     }
-      //   });
-      //   console.log(responseGet)
-      //   setPosts(responseGet.data.data)
+      const responseGet = await axios.get(`${urlPosts}/getAll`, 
+        {headers: {
+          'Authorization': `Bearer ${token}`
+          }
+        });
+        console.log(responseGet)
+        setPosts(responseGet.data.data)
+        closeReqModal()
     } catch (error) {
       console.error(error);
     }
@@ -285,11 +286,11 @@ const reverseString = (string) => {
   
 
               return(
-                <div className="flex-col w-[150px] p-2 hover:cursor-pointer" key={req.id} id={req.Carer.id}>
+                <div className={`flex-col w-[150px] p-2 m-2 hover:cursor-pointer rounded-xl ${req.status == "Aceptada" && "bg-green bg-opacity-20" }`} key={req.id} id={req.Carer.id}>
                   <div className="border w-16 h-16 rounded-full mx-auto bg-cover bg-center" style={{ backgroundImage: `url(${req.Carer.image})`}} id={req.id} onClick={openReqModal}></div>
                   <h1 className="text-sm text-center font-semibold">{req.Carer.name}</h1>
-                  <div className="flex w-full justify-center"><StarRating value={result}/></div>
-                  <div className="bg-orange text-white text-center w-24 rounded-full mx-auto mt-2" >{req.status}</div>
+                  <div className="flex w-full justify-center h-6"><StarRating value={result}/></div>
+                  <div className={`text-white text-center w-24 rounded-full mx-auto mt-2 ${req.status ==="pending" ? "bg-gray-600" : "bg-orange"}`} >{req.status ==="pending" ? "Pendiente" : req.status}</div>
                 </div>
                 )})}
 

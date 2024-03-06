@@ -30,27 +30,27 @@ export const Header = () => {
           alt="logo"
         />
       </div>
-      <div className="pr-10 font-semibold flex justify-between items-center gap-24">
+      <div className="pr-10 font-semibold flex justify-between items-center gap-24 text-lg">
         <ul className="flex gap-8 mr-24 hover:cursor-pointer">
-          <li className="hover:border-b text-white text-xl">Como funciona</li>
-          <li className="hover:border-b text-white text-xl">Ser cuidador</li>
-          <li className="hover:border-b text-white text-xl">
+          <li className="hover:border-b text-white ">Como funciona</li>
+          <li className="hover:border-b text-white ">Ser cuidador</li>
+          <li className="hover:border-b text-white ">
             Encontrar cuidador
           </li>
-          <li className="hover:border-b text-white text-xl">Ayuda</li>
+          <li className="hover:border-b text-white ">Ayuda</li>
         </ul>
 
         {Object.keys(userData).length === 0 ? (
           <div className="flex gap-5">
             <Link
               to="/ingresar"
-              className=" bg-white text-gray-text text-xl py-2 px-4 rounded-full hover:shadow-lg"
+              className=" bg-white text-gray-text py-2 px-4 rounded-full hover:shadow-lg"
             >
               Inicia Sesión
             </Link>
             <Link
               to="/registro"
-              className=" bg-orange text-white text-xl py-2 px-4 rounded-full hover:shadow-lg"
+              className=" bg-orange text-white py-2 px-4 rounded-full hover:shadow-lg"
             >
               Crea tu cuenta
             </Link>
