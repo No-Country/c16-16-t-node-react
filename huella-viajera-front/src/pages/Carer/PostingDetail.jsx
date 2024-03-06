@@ -7,12 +7,25 @@ import { format } from "date-fns";
 import { useState } from "react";
 import { ModalMessages } from "./ModaMessages";
 import { ModalImage } from "./ModalImage";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 export const PostingDetail = () => {
+  const { userData } = useContext(UserContext);
   const [modalMessages, setModalMessages] = useState(false);
   const [modalImages, setModalImages] = useState(false);
   const location = useLocation();
   const post = location.state?.post;
+
+  const verifyMyRequest = () => {
+    const id = userData?.carer?.id;
+    console;
+    const result = post.requests.some((request) => {
+      return request.carerId === id;
+    });
+
+    return result;
+  };
   return (
     <ContenedorCarer style={{ backgroundImage: `url(${BG})` }}>
       <div
@@ -104,9 +117,11 @@ export const PostingDetail = () => {
               </p>
             </div>
             <div className="d-flex justify-end">
-              <ButtonStyled onClick={() => setModalMessages(true)}>
-                Aplicar
-              </ButtonStyled>
+              {verifyMyRequest() ? (
+                <ButtonStyled disabled>Ya aplicaste</ButtonStyled>
+              ) : (
+                <ButtonStyled>Aplicar</ButtonStyled>
+              )}
               <ModalMessages
                 show={modalMessages}
                 onHide={() => setModalMessages(false)}

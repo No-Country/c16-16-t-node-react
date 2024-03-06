@@ -13,7 +13,14 @@ export const id = async (req, res, next) => {
         id,
       },
       include: {
-        ratings: true,
+        ratings: {
+          where: {
+            destination: "ownerPet",
+          },
+          include: {
+            Carer: true,
+          },
+        },
         photos: true,
         pets: true,
       },

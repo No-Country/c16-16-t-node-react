@@ -1,15 +1,20 @@
 import { Badge, Card, Image } from "react-bootstrap";
 import { ButtonStyled } from "./StyledComponents";
 import { formatDistanceToNow } from "date-fns";
-import { es } from "date-fns/locale";
+import { es, vi } from "date-fns/locale";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 
-export const PostingCard = ({ post, viewPosting }) => {
+export const PostingCard = ({ post, viewPosting, viewProfile }) => {
   const { userData } = useContext(UserContext);
 
   const viewDetail = () => {
     viewPosting(post);
+  };
+
+  const viewProfileOwner = () => {
+    viewProfile(post.ownerPetId);
+    console.log(post.ownerPetId);
   };
 
   const verifyMyRequest = () => {
@@ -77,6 +82,11 @@ export const PostingCard = ({ post, viewPosting }) => {
                 "https://res.cloudinary.com/dppqkypts/image/upload/v1701901417/Dise%C3%B1o_sin_t%C3%ADtulo_11_r8jfvs.png"
               }
               roundedCircle
+              style={{
+                cursor: "pointer",
+                boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.5)",
+              }}
+              onClick={viewProfileOwner}
             />
             <div>
               <strong>

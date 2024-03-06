@@ -25,6 +25,7 @@ export const create = async (req, res, next) => {
         comment: body.comment,
         carerId,
         ownerPetId,
+        destination: typeUser,
       },
     });
 
