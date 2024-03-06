@@ -109,6 +109,7 @@ export const update = async (req, res, next) => {
       },
       data: {
         message: body.message,
+        status: body.status,
       },
     });
 
