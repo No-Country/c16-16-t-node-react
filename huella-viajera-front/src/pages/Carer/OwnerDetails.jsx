@@ -1,14 +1,15 @@
 import { ContenedorCarer } from "./StyledComponents";
 import { Image, Spinner, Card } from "react-bootstrap";
 import BG from "@assets/BG.png";
-import { UserContext } from "../../context/UserContext";
-import { useContext } from "react";
-import { useMyProfile } from "../../domain/useMyProfile";
-import { format } from "date-fns";
 
-export const Ratings = () => {
-  const { userData } = useContext(UserContext);
-  const { data, loading, error } = useMyProfile({ id: userData?.carer?.id });
+import { format } from "date-fns";
+import { useParams } from "react-router-dom";
+import { useProfileOwner } from "../../domain/useProfileOwner";
+
+export const OwnerDetails = () => {
+  const param = useParams();
+  const { id } = param;
+  const { data, loading, error } = useProfileOwner({ id });
 
   const StarRating = ({ value }) => {
     const stars = [];
@@ -44,12 +45,12 @@ export const Ratings = () => {
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.5)",
         }}
       >
-        <strong>Mis reseñas como cuidador</strong>
+        <strong>Reseñas del Anfitrion</strong>
         <div className="d-flex align-items-center gap-4">
           <Image
             width={100}
             src={
-              userData?.carer?.image ||
+              data?.image ||
               "https://res.cloudinary.com/dppqkypts/image/upload/v1701901417/Dise%C3%B1o_sin_t%C3%ADtulo_11_r8jfvs.png"
             }
             roundedCircle
@@ -80,12 +81,12 @@ export const Ratings = () => {
                     <Image
                       width={30}
                       src={
-                        rating.OwnerPet.image ||
+                        rating.Carer.image ||
                         "https://res.cloudinary.com/dppqkypts/image/upload/v1701901417/Dise%C3%B1o_sin_t%C3%ADtulo_11_r8jfvs.png"
                       }
                       roundedCircle
                     />
-                    <p>{rating.OwnerPet?.name}</p>
+                    <p>{rating.Carer?.name}</p>
                   </Card.Title>
                   <Card.Text>
                     {format(rating.createdAt, "dd/MM/yyyy")}

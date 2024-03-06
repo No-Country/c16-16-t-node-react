@@ -20,6 +20,10 @@ export const Posting = () => {
   const viewPosting = (post) => {
     navigate(`/carer/postings/${post.id}`, { state: { post } });
   };
+
+  const viewProfile = (id) => {
+    navigate(`/carer/profileOwner/${id}`);
+  };
   return (
     <ContenedorCarer style={{ backgroundImage: `url(${BG})` }}>
       <div
@@ -44,6 +48,7 @@ export const Posting = () => {
                   key={posting.id}
                   post={posting}
                   viewPosting={viewPosting}
+                  viewProfile={viewProfile}
                 />
               );
             })
