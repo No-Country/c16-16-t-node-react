@@ -80,6 +80,7 @@ export const list = async (req, res, next) => {
             country: true,
             city: true,
             pets: true,
+            ratings: true,
           },
         },
       },

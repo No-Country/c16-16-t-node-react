@@ -13,7 +13,11 @@ export const id = async (req, res, next) => {
         id,
       },
       include: {
-        ratings: true,
+        ratings: {
+          include: {
+            OwnerPet: true,
+          },
+        },
       },
     });
 
