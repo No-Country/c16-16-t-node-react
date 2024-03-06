@@ -36,32 +36,23 @@ export const PostingDetail = () => {
             <Card.Title>{post.title}</Card.Title>
             <div className="d-flex justify-content-between flex-wrap mb-3">
               <div>
-                <Image src={post.OwnerPet.image} rounded width={50} />
-                <i
-                  className="bi bi-star-fill"
+                <Image src={post.OwnerPet.image} roundedCircle width={50} />
+                <div
+                  className="pt-2 pb-2 mt-2"
                   style={{
-                    color: "#EEB800",
+                    backgroundColor: "#F5F5F5",
+                    borderRadius: "10px",
+                    padding: "0.5rem",
                   }}
-                ></i>
-                <i
-                  className="bi bi-star-fill"
-                  style={{
-                    color: "#EEB800",
-                  }}
-                ></i>
-                <i
-                  className="bi bi-star-fill"
-                  style={{
-                    color: "#EEB800",
-                  }}
-                ></i>
-                <p>{post.OwnerPet.name}</p>
-                <p>
-                  {post.OwnerPet.address}-{post.OwnerPet.city}
-                </p>
-                <p>{post.OwnerPet.country}</p>
+                >
+                  <p>{post.OwnerPet.name}</p>
+                  <p>
+                    {post.OwnerPet.address}-{post.OwnerPet.city}
+                  </p>
+                  <p>{post.OwnerPet.country}</p>
+                </div>
               </div>
-              <div className="d-flex gap-1">
+              <div className="d-flex  gap-2">
                 {post.OwnerPet.photos.map((image) => {
                   return (
                     <Image

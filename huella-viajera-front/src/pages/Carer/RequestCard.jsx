@@ -2,14 +2,18 @@ import { Card } from "react-bootstrap";
 import { Badge, Image } from "react-bootstrap";
 import { format } from "date-fns";
 import { ButtonStyled } from "./StyledComponents";
+import { useState } from "react";
+import { ModalRating } from "./ModalRating";
 export const RequestCard = ({ request }) => {
   const fechaActual = new Date();
+  const [modalMessages, setModalMessages] = useState(false);
+  const [modalImages, setModalImages] = useState(false);
   return (
     <div>
       <Card
         style={{
           width: "45rem",
-          height: "15rem",
+          height: "16rem",
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
         }}
         className="d-flex flex-column  "
@@ -45,6 +49,13 @@ export const RequestCard = ({ request }) => {
                   Del {format(request.Posting?.initialDate, "dd/MM/yyy")} al{" "}
                   {format(request.Posting.finalDate, "dd/MM/yyy")}
                 </p>
+
+                <Badge bg="danger">
+                  {request.status === "Aceptada" &&
+                  new Date(request.Posting.finalDate) < fechaActual
+                    ? "Finalizada"
+                    : ""}
+                </Badge>
               </div>
             </div>
 
@@ -59,8 +70,15 @@ export const RequestCard = ({ request }) => {
           <div className="d-flex gap-3 justify-center">
             {request.status === "Aceptada" &&
               new Date(request.Posting.finalDate) < fechaActual && (
-                <ButtonStyled>Calificar</ButtonStyled>
+                <ButtonStyled onClick={() => setModalMessages(true)}>
+                  Calificar
+                </ButtonStyled>
               )}
+            <ModalRating
+              show={modalMessages}
+              onHide={() => setModalMessages(false)}
+              ownerPetId={request.Posting.OwnerPet.id}
+            />
             {request.status === "Aceptada" &&
               new Date(request.Posting.finalDate) > fechaActual && (
                 <ButtonStyled>Chat</ButtonStyled>
