@@ -47,15 +47,23 @@ export const PostingDetail = () => {
         >
           <Card.Body>
             <Card.Title>{post.title}</Card.Title>
-            <div className="d-flex justify-content-between flex-wrap mb-3">
+            <div className="d-flex justify-content-between flex-wrap mb-3 pt-4">
               <div>
-                <Image src={post.OwnerPet.image} roundedCircle width={50} />
+                <Image
+                  src={post.OwnerPet.image}
+                  roundedCircle
+                  width={50}
+                  style={{
+                    boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.5)",
+                  }}
+                />
                 <div
                   className="pt-2 pb-2 mt-2"
                   style={{
                     backgroundColor: "#F5F5F5",
                     borderRadius: "10px",
                     padding: "0.5rem",
+                    boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
                   }}
                 >
                   <p>{post.OwnerPet.name}</p>
@@ -76,7 +84,7 @@ export const PostingDetail = () => {
                       style={{
                         width: "100px",
                         height: "100px",
-                        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
+                        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.5)",
                       }}
                     />
                   );
@@ -104,7 +112,18 @@ export const PostingDetail = () => {
               <div className="d-flex flex-wrap gap-4 pt-3">
                 {post.OwnerPet.pets.map((pet) => {
                   return (
-                    <Image key={pet.id} src={pet.image} rounded width={50} />
+                    <Image
+                      key={pet.id}
+                      src={pet.image}
+                      rounded
+                      width={50}
+                      style={{
+                        cursor: "pointer",
+                        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.5)",
+                        height: "7rem",
+                        width: "7rem",
+                      }}
+                    />
                   );
                 })}
               </div>
@@ -116,7 +135,7 @@ export const PostingDetail = () => {
                 documentacion al dia.
               </p>
             </div>
-            <div className="d-flex justify-end">
+            <div className="d-flex justify-end pt-4">
               {verifyMyRequest() ? (
                 <ButtonStyled disabled>Ya aplicaste</ButtonStyled>
               ) : (

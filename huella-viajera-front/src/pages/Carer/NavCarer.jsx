@@ -10,6 +10,10 @@ import {
 import { useContext } from "react";
 
 export const NavCarer = () => {
+  const cerrarSesion = () => {
+    sessionStorage.removeItem("token");
+    window.location.reload();
+  };
   const { userData } = useContext(UserContext);
   return (
     <ContenedorNav className="d-flex justify-content-between  ">
@@ -49,7 +53,7 @@ export const NavCarer = () => {
         <NavLinkStyled to="/carer/ratings">
           <i className="bi bi-receipt-cutoff"></i>Mis reseñas
         </NavLinkStyled>
-        <NavLinkStyled to="/carer/ratings">
+        <NavLinkStyled onClick={cerrarSesion}>
           <i className="bi bi-box-arrow-left"></i>Cerrar sesion
         </NavLinkStyled>
       </NavStyled>
