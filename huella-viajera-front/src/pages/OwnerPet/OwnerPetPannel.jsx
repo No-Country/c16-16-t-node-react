@@ -45,7 +45,7 @@ export const OwnerPetPannel = () => {
                   first4images.map((image, idx) => {
                     return(
                     <div key={idx}>
-                      <img src={image} className='object-cover w-16 h-16 rounded-lg' alt="user images"/>
+                      <img src={image} className='object-cover w-14 h-14 rounded-lg' alt="user images"/>
                     </div>)})}
                 </div>
               </div>
