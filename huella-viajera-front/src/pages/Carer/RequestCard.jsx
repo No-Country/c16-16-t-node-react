@@ -46,13 +46,13 @@ export const RequestCard = ({ request }) => {
               <div className="pt-2">
                 <strong>Duracion</strong>
                 <p>
-                  Del {format(request.Posting?.initialDate, "dd/MM/yyy")} al{" "}
-                  {format(request.Posting.finalDate, "dd/MM/yyy")}
+                  Del {format(request.Posting?.initialDate, "dd/MM/yyyy")} al{" "}
+                  {format(request.Posting?.finalDate, "dd/MM/yyyy")}
                 </p>
 
                 <Badge bg="danger">
                   {request.status === "Aceptada" &&
-                  new Date(request.Posting.finalDate) < fechaActual
+                  new Date(request.Posting?.finalDate) < fechaActual
                     ? "Finalizada"
                     : ""}
                 </Badge>
@@ -69,7 +69,7 @@ export const RequestCard = ({ request }) => {
           </div>
           <div className="d-flex gap-3 justify-center">
             {request.status === "Aceptada" &&
-              new Date(request.Posting.finalDate) < fechaActual && (
+              new Date(request.Posting?.finalDate) < fechaActual && (
                 <ButtonStyled onClick={() => setModalMessages(true)}>
                   Calificar
                 </ButtonStyled>
@@ -77,10 +77,10 @@ export const RequestCard = ({ request }) => {
             <ModalRating
               show={modalMessages}
               onHide={() => setModalMessages(false)}
-              ownerPetId={request.Posting.OwnerPet.id}
+              ownerPetId={request.Posting?.OwnerPet.id}
             />
             {request.status === "Aceptada" &&
-              new Date(request.Posting.finalDate) > fechaActual && (
+              new Date(request.Posting?.finalDate) > fechaActual && (
                 <ButtonStyled>Chat</ButtonStyled>
               )}
           </div>

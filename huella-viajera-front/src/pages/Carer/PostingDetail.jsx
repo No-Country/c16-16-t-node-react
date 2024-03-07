@@ -139,7 +139,13 @@ export const PostingDetail = () => {
               {verifyMyRequest() ? (
                 <ButtonStyled disabled>Ya aplicaste</ButtonStyled>
               ) : (
-                <ButtonStyled>Aplicar</ButtonStyled>
+                <ButtonStyled
+                  onClick={() => {
+                    setModalMessages(true);
+                  }}
+                >
+                  Aplicar
+                </ButtonStyled>
               )}
               <ModalMessages
                 show={modalMessages}
