@@ -7,7 +7,7 @@
     + Welinton Suarez Galvis
       + [Linkedin]( https://www.linkedin.com/in/welinton-suarez/ )
     + Santina Quesada
-      + [Linkedin]( )
+      + [Linkedin](https://www.linkedin.com/in/santina-quesada-78463b2a7/)
   
 + **FRONTEND**
     + Danilo Correas
