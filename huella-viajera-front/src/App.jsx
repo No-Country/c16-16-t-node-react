@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 //Components:
 import { Header } from "./pages/Header";
-import { Inicio } from "./pages/inicio";
+import { Inicio } from "./pages/Inicio";
 import { Ingresar } from "./pages/Ingresar";
 import { Registro } from "./pages/Registro";
 import { OwnerPet } from "./pages/OwnerPet/OwnerPet";
