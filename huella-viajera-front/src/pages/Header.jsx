@@ -22,7 +22,7 @@ export const Header = () => {
   };
 
   return (
-    <div className="bg-cyan h-28 flex shadow-lg drop-shadow-lg">
+    <div className="bg-cyan h-28 flex shadow-lg drop-shadow-lg relative z-50">
       <div className="w-[350px]">
         <img
           className="h-36 w-56 bg-logo bg-center shadow-lg mx-auto"
@@ -52,7 +52,7 @@ export const Header = () => {
               to="/registro"
               className=" bg-orange text-white py-2 px-4 rounded-full hover:shadow-lg"
             >
-              Crea tu cuenta
+              Crea una cuenta
             </Link>
           </div>
         ) : (

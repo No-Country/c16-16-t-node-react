@@ -58,13 +58,13 @@ const onSubmit = (e) => {
         {userData.role === "ownerPet" && <Navigate to={`/ownerPet?userId=${userData.id}`}/>}
 
         <div className="flex w-full h-[90vh] min-h-[650px] bg-cover bg-center justify-center items-center" style={{ backgroundImage: `url(${BG})`}}>
-            <div className='flex flex-col w-[400px] h-[350px] p-6 mx-6 rounded-md shadow-lg justify-center bg-gray-100'>
-                <h1 className='text-center text-2xl'>Ingresa a tu cuenta</h1>
+            <div className='flex flex-col w-[400px] h-[350px] p-6 mx-6 rounded-3xl shadow-lg justify-center bg-white'>
+                <h1 className='text-center text-2xl font-bold'>Ingresa a tu cuenta</h1>
                 {isLoading ? <div className='mx-auto my-16'>Cargando... Aguarde un momento</div> : 
                 <form className='text-center w-4/5 mx-auto mt-4' onSubmit={onSubmit}>
                     <input className='placeholder-gray-600 border rounded-sm hover:border-cyan hover:shadow-md focus:outline-cyan focus:shadow-md p-2 my-2 w-full' type="email" name='email' value={loginForm.email} placeholder='Dirección de Email' onChange={onInputChange} required/>
                     <input className='placeholder-gray-600 border rounded-sm hover:border-cyan hover:shadow-md focus:outline-cyan focus:shadow-md p-2 my-2 w-full' type="password" name='password' value={loginForm.password} placeholder='Contraseña' onChange={onInputChange} required/>
-                    <button className=' mx-6 m-2 font-bold bg-white border-2 border-cyan text-cyan p-2 rounded-md hover:bg-cyan hover:text-white' type='submit'>Iniciar Sesion</button>
+                    <button className=' mx-6 my-2 font-bold bg-orange text-white py-2 px-4 rounded-full hover:shadow-lg text-lg' type='submit'>Iniciar Sesion</button>
                 </form>}
                 <p className='text-sm text-center'>¿No tienes cuenta? 
                     <Link to={"/registro"} className='font-bold hover:underline'> Regístrate Aqui</Link>
