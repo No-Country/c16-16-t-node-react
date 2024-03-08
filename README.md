@@ -21,7 +21,9 @@
   - María Jung
     - [Linkedin](https://www.linkedin.com/in/maria-l-jung/)
 
-- **DISEÑO UX/UI** + Victoria Natalini + [Linkedin](https://www.linkedin.com/in/victoria-natalini?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+- **DISEÑO UX/UI**
+  + Victoria Natalini
+    + [Linkedin](https://www.linkedin.com/in/victoria-natalini?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
 
 - **TECNOLOGIAS**
   - ux/ui: Figma, adobe illustrator y photoshop
