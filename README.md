@@ -1,32 +1,33 @@
-  # ***PetStay***  
+# **_PetStay_**
+
 ### _Proyecto de Mascotas_
+
 # ︿︿︿︿︿︿ (( 🐾 )) ︿︿︿︿︿︿
-### ***Integrantes:***  
 
-+ **BACKEND**
-    + Welinton Suarez Galvis
-      + [Linkedin]( https://www.linkedin.com/in/welinton-suarez/ )
-    + Santina Quesada
-      + [Linkedin](https://www.linkedin.com/in/santina-quesada-78463b2a7/)
-  
-+ **FRONTEND**
-    + Danilo Correas
-      + [Linkedin]( https://www.linkedin.com/in/danilo-correas )
+### **_Integrantes:_**
 
-+ **TESTER**
-    + María Jung
-      + [Linkedin](www.linkedin.com/in/maria-l-jung)
+- **BACKEND**
+  - Welinton Suarez Galvis
+    - [Linkedin](https://www.linkedin.com/in/welinton-suarez/)
+  - Santina Quesada
+    - [Linkedin](https://www.linkedin.com/in/santina-quesada-78463b2a7/)
+- **FRONTEND**
 
-+ **DISEÑO UX/UI**
-    + Victoria Natalini
-      + [Linkedin]( https://www.linkedin.com/in/victoria-natalini?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
-) 
+  - Danilo Correas
+    - [Linkedin](https://www.linkedin.com/in/danilo-correas)
 
-+ **TECNOLOGIAS**
+- **TESTER**
+
+  - María Jung
+    - [Linkedin](https://www.linkedin.com/in/maria-l-jung/)
+
+- **DISEÑO UX/UI** + Victoria Natalini + [Linkedin](https://www.linkedin.com/in/victoria-natalini?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+
+- **TECNOLOGIAS**
   - ux/ui: Figma, adobe illustrator y photoshop
   - Frontend: Javascript, React, TailwindCSS
   - Testing: Postman, Mantis, Hojas de cálculo
-  - Backend: 
+  - Backend:
 
 # ︿︿︿︿︿︿ (( 🐾 )) ︿︿︿︿︿︿
 

@@ -21,7 +21,7 @@ export const RequestCard = ({ request }) => {
         <Card.Body className="d-flex flex-column">
           <div className="d-flex justify-between">
             <div>
-              <strong>Datos del propitario</strong>
+              <strong>Datos del propietario</strong>
               <div className="d-flex align-items-center gap-2 pt-2">
                 <Image
                   onClick={() => console.log("click")}
