@@ -25,6 +25,10 @@
   + Victoria Natalini
     + [Linkedin](https://www.linkedin.com/in/victoria-natalini?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
 
+- **REDACTOR**
+  + Cazzaniga Nancy Elizabeth
+    + [Linkedin](https://www.linkedin.com/in/nancy-elizabeth-cazzaniga-1858252b0/)
+      
 - **TECNOLOGIAS**
   - ux/ui: Figma, adobe illustrator y photoshop
   - Frontend: Javascript, React, TailwindCSS
